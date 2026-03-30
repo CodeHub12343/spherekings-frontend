@@ -9,6 +9,7 @@
  */
 
 import client from '@/api/client';
+import referralService from '@/api/services/referralService';
 
 /**
  * Create a Stripe checkout session from user's cart
@@ -27,13 +28,28 @@ import client from '@/api/client';
  */
 export async function createCheckoutSession(options = {}) {
   try {
-    const { affiliateId, metadata, shippingAddress } = options;
+    let { affiliateId, visitorId, metadata, shippingAddress } = options;
+    
+    // 🔗 CRITICAL: Read affiliate data from cookie if not explicitly passed
+    if (!affiliateId) {
+      const referralCookie = referralService.getReferralCookie();
+      if (referralCookie) {
+        affiliateId = referralCookie.affiliateId;
+        visitorId = referralCookie.visitorId;
+        console.log('🔗 [CHECKOUT] Affiliate data from cookie:', {
+          affiliateId: affiliateId ? '✓ Found' : '✗ Missing',
+          visitorId: visitorId ? '✓ Found' : '✗ Missing',
+          source: 'affiliate_ref cookie',
+        });
+      } else {
+        console.log('🔗 [CHECKOUT] No affiliate cookie found - proceeding as regular customer');
+      }
+    } else {
+      console.log('🔗 [CHECKOUT] Using explicitly passed affiliate data');
+    }
     
     console.log('🛒 Creating checkout session...');
     console.log('📦 Shipping address:', shippingAddress);
-    console.log('📦 Shipping address type:', typeof shippingAddress);
-    console.log('📦 Shipping address is null:', shippingAddress === null);
-    console.log('📦 Shipping address is undefined:', shippingAddress === undefined);
     
     const config = {
       ...(affiliateId && { params: { affiliateId } }),
@@ -41,12 +57,12 @@ export async function createCheckoutSession(options = {}) {
     
     const body = {
       ...(metadata && { metadata }),
+      ...(visitorId && { visitorId }),
       ...(shippingAddress && { shippingAddress }),
     };
 
-    console.log('📨 Request body:', body);
-    console.log('📨 Body keys:', Object.keys(body));
-    console.log('📨 Body has shippingAddress:', 'shippingAddress' in body);
+    console.log('📨 Request config:', { affiliateId: affiliateId ? 'included' : 'none', visitorId: visitorId ? 'included' : 'none' });
+    console.log('📨 Request body keys:', Object.keys(body));
     
     const response = await client.post(
       '/checkout/create-session',
@@ -61,6 +77,7 @@ export async function createCheckoutSession(options = {}) {
     console.log('✅ Checkout session created:', {
       sessionId: response.data.data.sessionId,
       url: response.data.data.url,
+      hasAffiliateAttribution: !!affiliateId,
     });
     
     return response.data.data;
