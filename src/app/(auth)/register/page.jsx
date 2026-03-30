@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import ReferralTracker from '@/components/affiliate/ReferralTracker';
 
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/components/ui/Toast';
@@ -305,7 +304,6 @@ function RegisterPageInner() {
 
   return (
     <PageContainer>
-      <ReferralTracker />
       <LeftSection>
         <BrandLogo>Spherekings</BrandLogo>
         <BrandSubtitle>

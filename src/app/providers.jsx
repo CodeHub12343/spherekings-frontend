@@ -61,7 +61,7 @@ export function Providers({ children }) {
         <GlobalStyles />
         <AuthProvider>
           <ToastProvider>
-            {/* <ReferralTracker /> Removed from global providers. Render only on pages that need it. */}
+            <ReferralTracker />
             {children}
           </ToastProvider>
         </AuthProvider>

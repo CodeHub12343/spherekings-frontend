@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import ReferralTracker from '@/components/affiliate/ReferralTracker';
 import { useRaffleAdminStats, useRaffleAdminEntries, useSelectRaffleWinner, useVerifyP2PEntry } from '@/api/hooks/useRaffle';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/components/ui/Toast';
@@ -658,7 +657,6 @@ const RaffleAdminDashboard = () => {
 
   return (
     <Container>
-      <ReferralTracker />
       <Header>
         <h1>Raffle Admin Dashboard</h1>
       </Header>

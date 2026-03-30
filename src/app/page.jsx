@@ -3,7 +3,6 @@
 import { Suspense } from 'react';
 import Header from '../sections/Header';
 import Hero from '../sections/Hero';
-import ReferralTracker from '@/components/affiliate/ReferralTracker';
 import ValueProp from '../sections/ValueProp';
 import HowItWorks from '../sections/HowItWorks';
 import FeaturesShowcase from '../sections/FeaturesShowcase';
@@ -22,7 +21,6 @@ import '../App.css';
 function App() {
   return (
     <div className="min-h-screen bg-white">
-      <ReferralTracker />
       <Header />
       <main>
         <Hero />

@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
-import ReferralTracker from '@/components/affiliate/ReferralTracker';
 import CartItemCard from '@/components/cart/CartItemCard';
 import CartSummaryPanel from '@/components/cart/CartSummaryPanel';
 import CartEmptyState from '@/components/cart/CartEmptyState';
@@ -290,7 +289,6 @@ export default function CartPage() {
 
   return (
     <PageContainer>
-      <ReferralTracker />
       <ContentWrapper>
         <PageHeader>
           <Title>Shopping Cart</Title>
