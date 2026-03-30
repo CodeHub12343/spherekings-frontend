@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Commission Summary Card Component
  * Displays earnings breakdown and payout threshold
@@ -5,8 +7,6 @@
 
 import styled from 'styled-components';
 import { TrendingUp, Wallet, AlertCircle } from 'lucide-react';
-'use client';
-
 import React from 'react';
 
 const Container = styled.div`

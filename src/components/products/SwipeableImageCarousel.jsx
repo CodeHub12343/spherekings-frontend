@@ -1,8 +1,6 @@
 'use client';
 
 import styled from 'styled-components';
-'use client';
-
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';

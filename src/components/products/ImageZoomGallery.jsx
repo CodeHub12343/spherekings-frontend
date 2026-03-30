@@ -1,8 +1,6 @@
 'use client';
 
 import styled from 'styled-components';
-'use client';
-
 import { useState } from 'react';
 
 const ZoomContainer = styled.div`
