@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+'use client';
 
 /**
  * Admin Pending Payouts Page
@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
  * Approval queue - pending payouts awaiting admin review
  */
 
-'use client';
+export const dynamic = 'force-dynamic';
 
 import React, { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';

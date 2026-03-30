@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+'use client';
 
 /**
  * Admin Commission Management Page
@@ -10,8 +10,6 @@ export const dynamic = 'force-dynamic';
  * - Approval, payment, and reversal actions
  * - Batch operations
  */
-
-'use client';
 
 export const dynamic = 'force-dynamic';
 

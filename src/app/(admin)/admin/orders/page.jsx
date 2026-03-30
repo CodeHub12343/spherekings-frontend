@@ -1,11 +1,11 @@
-export const dynamic = 'force-dynamic';
+'use client';
 
 /**
  * Admin Orders Dashboard Page
  * Complete order management interface for admins
  */
 
-'use client';
+export const dynamic = 'force-dynamic';
 
 import styled from 'styled-components';
 import { useEffect, useState, useRef } from 'react';

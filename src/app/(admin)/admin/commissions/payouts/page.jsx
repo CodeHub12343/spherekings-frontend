@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+'use client';
 
 /**
  * Admin Ready Payouts Page
@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
  * - Payment processing
  */
 
-'use client';
+export const dynamic = 'force-dynamic';
 
 import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';

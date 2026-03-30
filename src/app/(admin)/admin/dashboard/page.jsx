@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+'use client';
 
 /**
  * Admin Dashboard Main Page
@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
  * Overview of all platform metrics and key statistics
  */
 
-'use client';
+export const dynamic = 'force-dynamic';
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';

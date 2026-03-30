@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Admin Commission Detail Page
  * /admin/commissions/[commissionId]
@@ -11,8 +13,6 @@
  */
 
 export const dynamic = 'force-dynamic';
-
-'use client';
 
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';

@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+'use client';
 
 /**
  * Admin Payout Detail Page
@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
  * Displays full payout details with admin actions
  */
 
-'use client';
+export const dynamic = 'force-dynamic';
 
 import React, { useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
