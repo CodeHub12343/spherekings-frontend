@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import styled from 'styled-components';
@@ -97,7 +97,7 @@ const ErrorDetails = styled.div`
  * 
  * Example: /products?search=iPhone&category=Electronics&maxPrice=900&page=1
  */
-export default function ProductsPage() {
+function ProductsPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -424,5 +424,13 @@ export default function ProductsPage() {
         />
       </ContentContainer>
     </PageContainer>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={null}>
+      <ProductsPageInner />
+    </Suspense>
   );
 }
