@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 /**
  * Admin Ready Payouts Page
  * /admin/commissions/payouts
@@ -9,8 +11,6 @@
  */
 
 'use client';
-
-export const dynamic = 'force-dynamic';
 
 import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';

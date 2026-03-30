@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 /**
  * Admin Payout Detail Page
  * /admin/payouts/[payoutId]
@@ -6,8 +8,6 @@
  */
 
 'use client';
-
-export const dynamic = 'force-dynamic';
 
 import React, { useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';

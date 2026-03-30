@@ -1,6 +1,6 @@
-'use client';
-
 export const dynamic = 'force-dynamic';
+
+'use client';
 
 import { useState, useMemo } from 'react';
 import styled from 'styled-components';
