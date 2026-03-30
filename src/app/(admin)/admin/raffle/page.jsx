@@ -1,5 +1,4 @@
 'use client';
-export const dynamic = 'force-dynamic';
 
 import styled from 'styled-components';
 import { useState } from 'react';
