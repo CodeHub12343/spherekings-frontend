@@ -11,7 +11,7 @@
 
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import styled from 'styled-components';
 import { useCheckout } from '@/hooks/useCheckout';
