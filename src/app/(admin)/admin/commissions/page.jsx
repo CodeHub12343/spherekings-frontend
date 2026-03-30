@@ -11,8 +11,6 @@
  * - Batch operations
  */
 
-export const dynamic = 'force-dynamic';
-
 import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';

@@ -7,8 +7,6 @@
  * Admin dashboard for viewing and managing all payouts
  */
 
-export const dynamic = 'force-dynamic';
-
 import React, { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';

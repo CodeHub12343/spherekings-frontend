@@ -7,8 +7,6 @@
  * Overview of all platform metrics and key statistics
  */
 
-export const dynamic = 'force-dynamic';
-
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';

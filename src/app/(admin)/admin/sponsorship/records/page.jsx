@@ -1,7 +1,5 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
 import { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { useSponsorshipRecordsList, useAddVideoLink, useUpdateSponsorshipStatus } from '@/api/hooks/useSponsorship';

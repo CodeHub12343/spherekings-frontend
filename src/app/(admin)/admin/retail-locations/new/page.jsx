@@ -1,7 +1,5 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import RetailLocationForm from '@/components/retail-locations/RetailLocationForm';

@@ -7,8 +7,6 @@
  * Displays full payout details with admin actions
  */
 
-export const dynamic = 'force-dynamic';
-
 import React, { useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import styled from 'styled-components';
