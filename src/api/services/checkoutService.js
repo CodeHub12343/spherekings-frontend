@@ -30,35 +30,62 @@ export async function createCheckoutSession(options = {}) {
   try {
     let { affiliateId, visitorId, metadata, shippingAddress } = options;
     
-    console.log('📊 [CHECKOUT SERVICE] createCheckoutSession called with options:', {
-      hasAffiliateId: !!affiliateId,
+    console.log('\n╔════════════════════════════════════════════════════════╗');
+    console.log('║    🔗 AFFILIATE ATTRIBUTION CHECKOUT FLOW              ║');
+    console.log('╚════════════════════════════════════════════════════════╝');
+    
+    console.log('📊 [CHECKOUT INIT] Options received:', {
+      hasExplicitAffiliateId: !!affiliateId,
       hasVisitorId: !!visitorId,
       hasMetadata: !!metadata,
       hasShippingAddress: !!shippingAddress,
+      optionsKeys: Object.keys(options),
     });
     
     // 🔗 CRITICAL: Read affiliate data from cookie if not explicitly passed
     if (!affiliateId) {
-      console.log('📊 [CHECKOUT SERVICE] affiliateId not provided - attempting to read from cookie...');
+      console.log('\n🔍 [COOKIE CHECK] affiliateId not explicitly passed. Reading from browser cookie...');
       const referralCookie = referralService.getReferralCookie();
+      
       if (referralCookie) {
         affiliateId = referralCookie.affiliateId;
         visitorId = referralCookie.visitorId;
-        console.log('✅ [CHECKOUT SERVICE] Affiliate data extracted from cookie:', {
-          affiliateId: affiliateId ? `${affiliateId.substring(0, 10)}...` : '✗ Missing',
-          visitorId: visitorId ? `${visitorId.substring(0, 10)}...` : '✗ Missing',
-          source: 'affiliate_ref cookie',
+        console.log('✅ [COOKIE SUCCESS] Affiliate data extracted from affiliate_ref cookie:', {
+          affiliateId: affiliateId ? `✓ ${affiliateId.substring(0, 12)}...` : '✗ undefined',
+          visitorId: visitorId ? `✓ ${visitorId.substring(0, 12)}...` : '✗ undefined',
+          timestamp: referralCookie.timestamp ? new Date(referralCookie.timestamp).toISOString() : 'unknown',
+         source: 'browser cookie (affiliateRef)',
         });
       } else {
-        console.log('⚠️ [CHECKOUT SERVICE] No affiliate cookie found - proceeding as regular customer');
+        console.log('⚠️  [COOKIE FAIL] No affiliate_ref cookie found!');
+        console.log('📌 Debugging: Checking document.cookie directly...');
+        try {
+          const allCookies = document.cookie;
+          console.log('   Document.cookie value:', allCookies.substring(0, 100) + '...');
+          const cookieList = allCookies.split(';').map(c => c.trim().split('=')[0]);
+          console.log('   Available cookies:', cookieList.join(', '));
+        } catch (e) {
+          console.log('   Error accessing document.cookie:', e.message);
+        }
+        console.log('⚠️  [CHECKOUT] Proceeding WITHOUT affiliate attribution (will be regular customer order)');
       }
     } else {
-      console.log('✅ [CHECKOUT SERVICE] Using explicitly passed affiliate data');
+      console.log('✅ [EXPLICIT AFFILIATE] Using explicitly passed affiliateId:', affiliateId.substring(0, 12) + '...');
     }
     
-    console.log('🛒 Creating checkout session...');
-    console.log('📦 Shipping address:', shippingAddress);
+    console.log('\n🛒 Creating Stripe checkout session...');
+    console.log('📦 Shipping address provided:', !!shippingAddress);
+    if (shippingAddress) {
+      console.log('   Address detail:', {
+        street: shippingAddress.street ? '✓' : '✗',
+        city: shippingAddress.city ? '✓' : '✗',
+        state: shippingAddress.state ? '✓' : '✗',
+        zip: shippingAddress.postalCode ? '✓' : '✗',
+        country: shippingAddress.country ? '✓' : '✗',
+      });
+    }
     
+    // IMPORTANT: Include affiliateId in BOTH query params and request body for robustness
     const config = {
       ...(affiliateId && { params: { affiliateId } }),
     };
@@ -66,18 +93,22 @@ export async function createCheckoutSession(options = {}) {
     const body = {
       ...(metadata && { metadata }),
       ...(visitorId && { visitorId }),
+      ...(affiliateId && { affiliateId }),  // CRITICAL: Include in body too!
       ...(shippingAddress && { shippingAddress }),
     };
 
-    console.log('📨 [CHECKOUT SERVICE] Final request config:', {
-      url: '/checkout/create-session',
+    console.log('\n📨 [REQUEST BUILT] Sending to backend:', {
+      endpoint: '/checkout/create-session',
       method: 'POST',
-      hasAffiliateId: !!affiliateId,
-      affiliateId: affiliateId ? `${affiliateId.substring(0, 15)}...` : '❌ MISSING',
-      hasVisitorId: !!visitorId,
-      hasMetadata: !!metadata,
+      queryParams: { affiliateId: affiliateId ? '✓ included' : '✗ missing' },
+      bodyParams: {
+        affiliateId: affiliateId ? `✓ ${affiliateId.substring(0, 12)}...` : '✗ MISSING',
+        visitorId: visitorId ? '✓ included' : '✗ missing',
+        shippingAddress: shippingAddress ? '✓ included' : '✗ missing',
+        metadata: metadata ? '✓ included' : '✗ missing',
+      },
+      bodyKeysCount: Object.keys(body).length,
     });
-    console.log('📨 [CHECKOUT SERVICE] Request body keys:', Object.keys(body));
     
     const response = await client.post(
       '/checkout/create-session',
@@ -89,11 +120,12 @@ export async function createCheckoutSession(options = {}) {
       throw new Error(response.data.message || 'Failed to create checkout session');
     }
     
-    console.log('✅ Checkout session created:', {
-      sessionId: response.data.data.sessionId,
-      url: response.data.data.url,
-      hasAffiliateAttribution: !!affiliateId,
+    console.log('\n✅ [SUCCESS] Stripe checkout session created!', {
+      sessionId: response.data.data.sessionId.substring(0, 15) + '...',
+      affiliateAttribution: affiliateId ? `✅ ATTACHED (${affiliateId.substring(0, 12)}...)` : '⚠️  NONE',
+      status: 'ready for Stripe redirect',
     });
+    console.log('═══════════════════════════════════════════════════════\n');
     
     return response.data.data;
   } catch (error) {
