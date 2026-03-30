@@ -445,7 +445,7 @@ const CancelButton = styled(Button)`
  * Admin only - Manage product categories
  */
 
-export default function CategoriesPage() {
+function CategoriesPageContent() {
   // ...existing code...
   const { success, error: showError } = useToast();
   const { data: categories = [], isLoading } = useCategories();
@@ -520,7 +520,6 @@ export default function CategoriesPage() {
   };
 
   return (
-    <Suspense fallback={null}>
       <PageContainer>
         <PageHeader>
           <Title>Categories Management</Title>
@@ -637,6 +636,14 @@ export default function CategoriesPage() {
           </ModalContent>
         </Modal>
       </PageContainer>
+  );
+}
+
+// Wrapper component for Suspense boundary
+export default function CategoriesPage() {
+  return (
+    <Suspense fallback={<div>Loading categories...</div>}>
+      <CategoriesPageContent />
     </Suspense>
   );
 }
