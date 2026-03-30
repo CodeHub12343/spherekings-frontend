@@ -2,6 +2,7 @@
 
 'use client';
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 import { Suspense } from 'react';
 
@@ -446,7 +447,7 @@ const CancelButton = styled(Button)`
  */
 
 function CategoriesPageContent() {
-  // ...existing code...
+  // All hooks that need Suspense wrapping go here
   const { success, error: showError } = useToast();
   const { data: categories = [], isLoading } = useCategories();
   const createCategory = useCreateCategory();
@@ -642,7 +643,7 @@ function CategoriesPageContent() {
 // Wrapper component for Suspense boundary
 export default function CategoriesPage() {
   return (
-    <Suspense fallback={<div>Loading categories...</div>}>
+    <Suspense fallback={<PageContainer><EmptyState><h3>Loading categories...</h3></EmptyState></PageContainer>}>
       <CategoriesPageContent />
     </Suspense>
   );
