@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Header from '../sections/Header';
 import Hero from '../sections/Hero';
 import ValueProp from '../sections/ValueProp';
@@ -39,4 +40,11 @@ function App() {
   );
 }
 
-export default App;
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={null}>
+      <App />
+    </Suspense>
+  );
+}
