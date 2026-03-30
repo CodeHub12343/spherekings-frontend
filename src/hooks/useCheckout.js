@@ -220,20 +220,23 @@ export function useCheckoutErrors() {
  */
 export function useCheckoutAffiliateTracking() {
   const getAffiliateId = useCallback(() => {
-    // Try to get from cookie
-    const cookies = document.cookie.split(';');
-    for (let cookie of cookies) {
-      const [name, value] = cookie.trim().split('=');
-      if (name === 'affiliate_ref') {
-        try {
+    try {
+      // Try to get from cookie
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === 'affiliate_ref') {
           const decoded = JSON.parse(decodeURIComponent(value));
+          console.log('✅ [AFFILIATE] Cookie found - affiliateId:', decoded.affiliateId ? '✓ Present' : '✗ Missing', decoded.affiliateId);
           return decoded.affiliateId;
-        } catch (e) {
-          return null;
         }
       }
+      console.log('✗ [AFFILIATE] No affiliate_ref cookie found');
+      return null;
+    } catch (e) {
+      console.error('❌ [AFFILIATE] Error parsing cookie:', e.message);
+      return null;
     }
-    return null;
   }, []);
 
   const setAffiliateId = useCallback((affiliateId) => {
