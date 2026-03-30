@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+'use client';
 
 import styled from 'styled-components';
 import { useParams, useRouter } from 'next/navigation';
