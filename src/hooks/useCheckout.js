@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Checkout Custom Hooks
  * React hooks for checkout operations

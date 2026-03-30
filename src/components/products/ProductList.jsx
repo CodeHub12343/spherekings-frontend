@@ -1,6 +1,8 @@
 'use client';
 
 import styled from 'styled-components';
+'use client';
+
 import { useState } from 'react';
 import { Sliders } from 'lucide-react';
 import ProductCard from './ProductCard';

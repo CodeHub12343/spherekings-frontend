@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Order Hooks
  * Custom React hooks for order management

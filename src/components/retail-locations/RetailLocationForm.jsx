@@ -1,6 +1,8 @@
 'use client';
 
 import styled from 'styled-components';
+'use client';
+
 import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';

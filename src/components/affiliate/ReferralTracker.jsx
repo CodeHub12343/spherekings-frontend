@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Referral Tracker Component
  * Handles referral URL parameter detection and click tracking
