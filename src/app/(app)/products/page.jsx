@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import styled from 'styled-components';
+import ReferralTracker from '@/components/affiliate/ReferralTracker';
 import { useProducts } from '@/hooks/useProducts';
 import { useAddToCart } from '@/hooks/useCart';
 import { useToast } from '@/components/ui/Toast';
@@ -388,6 +389,7 @@ function ProductsPageInner() {
 
   return (
     <PageContainer>
+      <ReferralTracker />
       <PageHeader>
         <Title>Our Products</Title>
         <Subtitle>

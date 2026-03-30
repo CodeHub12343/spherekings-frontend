@@ -109,7 +109,7 @@ export function useShipping() {
         }
       }
     },
-    [formData]
+    [formData, errors]
   );
 
   /**
