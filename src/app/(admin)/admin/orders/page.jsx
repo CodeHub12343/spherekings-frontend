@@ -6,9 +6,6 @@ export const dynamic = 'force-dynamic';
  * Complete order management interface for admins
  */
 
-'use client';
-export const dynamic = 'force-dynamic';
-
 import styled from 'styled-components';
 import { useEffect, useState, useRef } from 'react';
 import { useAdminOrdersHook, useOrderStatusUpdate } from '@/hooks/useOrders';
