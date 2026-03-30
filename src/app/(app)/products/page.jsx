@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import styled from 'styled-components';
 import { useProducts } from '@/hooks/useProducts';
 import { useAddToCart } from '@/hooks/useCart';
 import { useToast } from '@/components/ui/Toast';
