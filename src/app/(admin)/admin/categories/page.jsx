@@ -3,6 +3,9 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory } from '@/hooks/useCategories';
+
+// Disable static generation for this page since it uses dynamic data
+export const dynamic = 'force-dynamic';
 import { useToast } from '@/components/ui/Toast';
 import { Trash2, Edit2, Plus } from 'lucide-react';
 
