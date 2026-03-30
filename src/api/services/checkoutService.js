@@ -30,22 +30,30 @@ export async function createCheckoutSession(options = {}) {
   try {
     let { affiliateId, visitorId, metadata, shippingAddress } = options;
     
+    console.log('📊 [CHECKOUT SERVICE] createCheckoutSession called with options:', {
+      hasAffiliateId: !!affiliateId,
+      hasVisitorId: !!visitorId,
+      hasMetadata: !!metadata,
+      hasShippingAddress: !!shippingAddress,
+    });
+    
     // 🔗 CRITICAL: Read affiliate data from cookie if not explicitly passed
     if (!affiliateId) {
+      console.log('📊 [CHECKOUT SERVICE] affiliateId not provided - attempting to read from cookie...');
       const referralCookie = referralService.getReferralCookie();
       if (referralCookie) {
         affiliateId = referralCookie.affiliateId;
         visitorId = referralCookie.visitorId;
-        console.log('🔗 [CHECKOUT] Affiliate data from cookie:', {
-          affiliateId: affiliateId ? '✓ Found' : '✗ Missing',
-          visitorId: visitorId ? '✓ Found' : '✗ Missing',
+        console.log('✅ [CHECKOUT SERVICE] Affiliate data extracted from cookie:', {
+          affiliateId: affiliateId ? `${affiliateId.substring(0, 10)}...` : '✗ Missing',
+          visitorId: visitorId ? `${visitorId.substring(0, 10)}...` : '✗ Missing',
           source: 'affiliate_ref cookie',
         });
       } else {
-        console.log('🔗 [CHECKOUT] No affiliate cookie found - proceeding as regular customer');
+        console.log('⚠️ [CHECKOUT SERVICE] No affiliate cookie found - proceeding as regular customer');
       }
     } else {
-      console.log('🔗 [CHECKOUT] Using explicitly passed affiliate data');
+      console.log('✅ [CHECKOUT SERVICE] Using explicitly passed affiliate data');
     }
     
     console.log('🛒 Creating checkout session...');
@@ -61,8 +69,15 @@ export async function createCheckoutSession(options = {}) {
       ...(shippingAddress && { shippingAddress }),
     };
 
-    console.log('📨 Request config:', { affiliateId: affiliateId ? 'included' : 'none', visitorId: visitorId ? 'included' : 'none' });
-    console.log('📨 Request body keys:', Object.keys(body));
+    console.log('📨 [CHECKOUT SERVICE] Final request config:', {
+      url: '/checkout/create-session',
+      method: 'POST',
+      hasAffiliateId: !!affiliateId,
+      affiliateId: affiliateId ? `${affiliateId.substring(0, 15)}...` : '❌ MISSING',
+      hasVisitorId: !!visitorId,
+      hasMetadata: !!metadata,
+    });
+    console.log('📨 [CHECKOUT SERVICE] Request body keys:', Object.keys(body));
     
     const response = await client.post(
       '/checkout/create-session',
