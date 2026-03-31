@@ -4,6 +4,7 @@ import { Providers } from './providers';
 import '../index.css';
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <head>
