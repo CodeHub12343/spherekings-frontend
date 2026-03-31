@@ -866,6 +866,16 @@ export default function Header() {
                 >
                   Payouts
                 </CollapsibleNavLink>
+                <CollapsibleNavLink
+                  href="/affiliate/dashboard"
+                  className={isActive('/affiliate/dashboard') ? 'active' : ''}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setExpandedMobileSection(null);
+                  }}
+                >
+                  Dashboard
+                </CollapsibleNavLink>
               </CollapsibleSectionContent>
             </div>
           )}
@@ -980,6 +990,16 @@ export default function Header() {
                   }}
                 >
                   Categories
+                </CollapsibleNavLink>
+                <CollapsibleNavLink
+                  href="/admin/dashboard"
+                  className={isActive('/admin/dashboard') ? 'active' : ''}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setExpandedMobileSection(null);
+                  }}
+                >
+                  Dashboard
                 </CollapsibleNavLink>
               </CollapsibleSectionContent>
             </div>

@@ -1,19 +1,23 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Crown } from 'lucide-react';
 
-const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+const HeaderContent = () => {
+  const [isScrolled, setIsScrolled] = useState(true); // Start as true for initial stability
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const searchParams = useSearchParams();
   const ref = searchParams.get('ref');
   const registerHref = ref ? `/register?ref=${ref}` : '/register';
 
   useEffect(() => {
+    // Set mounted flag and check initial scroll position
+    setIsMounted(true);
+    setIsScrolled(window.scrollY > 50);
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -21,6 +25,18 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   const navLinks = [
      { label: 'Products', href: '#products' },
@@ -30,26 +46,18 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-sm shadow-md'
-          : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 will-change-transform ${
+        isMounted ? (isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-md' : 'bg-transparent') : 'bg-transparent'
       }`}
     >
       <div className="section-container">
         <div className="flex items-center justify-between h-[72px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 transition-transform duration-300 group-hover:scale-110">
-              <Image
-                src="/images/1000019613-removebg-preview.png"
-                alt="SphereOfKings Logo"
-                width={40}
-                height={40}
-                className="w-full h-full object-contain"
-              />
+            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+              <Crown className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-navy">SphereOfKings</span>
+            <span className="text-xl font-bold text-navy">SphereKings</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -148,4 +156,25 @@ const Header = () => {
   );
 };
 
-export default Header;
+// Suspense boundary to handle useSearchParams hydration
+const Header = () => (
+  <Suspense fallback={<HeaderSkeleton />}>
+    <HeaderContent />
+  </Suspense>
+);
+
+// Fallback skeleton to prevent layout shift
+const HeaderSkeleton = () => (
+  <header className="fixed top-0 left-0 right-0 z-50 bg-transparent h-[72px]">
+    <div className="section-container">
+      <div className="flex items-center justify-between h-[72px]">
+        <div className="flex items-center gap-2">
+          <div className="w-10 h-10 rounded-xl bg-primary" />
+          <div className="w-32 h-6 bg-gray-200 rounded" />
+        </div>
+        <div className="lg:hidden w-6 h-6 bg-gray-200 rounded" />
+      </div>
+    </div>
+  </header>
+);
+
