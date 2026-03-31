@@ -201,7 +201,7 @@ export default function InfluencerShowcase() {
               <Overline>Influencer Program</Overline>
               <Heading>Turn Your Influence Into Free Products</Heading>
               <Description>
-                Join our influencer network and receive exclusive SphereKings products in exchange
+                Join our influencer network and receive exclusive SphereOfKings products in exchange
                 for sharing with your community. Auto-approved if you have 5,000+ followers.
               </Description>
             </div>

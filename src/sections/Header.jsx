@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { Menu, X, Crown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -39,10 +40,16 @@ const Header = () => {
         <div className="flex items-center justify-between h-[72px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-              <Crown className="w-5 h-5 text-white" />
+            <div className="w-10 h-10 transition-transform duration-300 group-hover:scale-110">
+              <Image
+                src="/images/1000019613-removebg-preview.png"
+                alt="SphereOfKings Logo"
+                width={40}
+                height={40}
+                className="w-full h-full object-contain"
+              />
             </div>
-            <span className="text-xl font-bold text-navy">SphereKings</span>
+            <span className="text-xl font-bold text-navy">SphereOfKings</span>
           </Link>
 
           {/* Desktop Navigation */}

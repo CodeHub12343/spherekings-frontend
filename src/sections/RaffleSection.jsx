@@ -374,7 +374,7 @@ const RaffleSection = () => {
             </Title>
 
             <Subtitle>
-              Every bi-weekly cycle, one lucky customer wins an exclusive SphereKings premium board. 
+              Every bi-weekly cycle, one lucky customer wins an exclusive SphereOfKings premium board. 
               Entry is just $1 – low cost, life-changing opportunity!
             </Subtitle>
           </Content>

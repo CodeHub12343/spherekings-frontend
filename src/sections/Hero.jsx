@@ -45,7 +45,7 @@ const Hero = () => {
             </h1>
 
             <p className="body-text-lg mb-8 max-w-xl reveal opacity-0 translate-y-5 transition-all duration-600 ease-out delay-150">
-              Join the SphereKings marketplace where customers shop premium
+              Join the SphereOfKings marketplace where customers shop premium
               products and affiliates earn unlimited commissions. Scale your
               earnings with real-time analytics and instant payouts.
             </p>
@@ -92,7 +92,7 @@ const Hero = () => {
             <div className="relative animate-float">
               <img
                 src="/images/hero-visual.jpg"
-                alt="SphereKings Dashboard Analytics"
+                alt="SphereOfKings Dashboard Analytics"
                 className="w-full h-auto rounded-2xl shadow-premium"
               />
               {/* Decorative elements */}

@@ -7,7 +7,7 @@ const testimonials = [
   {
     stars: 5,
     quote:
-      'I was skeptical at first, but SphereKings proved itself in month one. I made $3,000 from my first 100 referrals. The dashboard is intuitive, payouts are instant, and support actually responds. 10/10.',
+      'I was skeptical at first, but SphereOfKings proved itself in month one. I made $3,000 from my first 100 referrals. The dashboard is intuitive, payouts are instant, and support actually responds. 10/10.',
     author: 'Sarah Chen',
     title: 'Digital Marketer',
     avatar: '/images/avatar-sarah.jpg',
@@ -15,7 +15,7 @@ const testimonials = [
   {
     stars: 5,
     quote:
-      "As a content creator with 50K followers, I was looking for a platform that wouldn't nickel-and-dime me. SphereKings doesn't. 15% commission, no cap, no games. I'm on track to earn $50K this year.",
+      "As a content creator with 50K followers, I was looking for a platform that wouldn't nickel-and-dime me. SphereOfKings doesn't. 15% commission, no cap, no games. I'm on track to earn $50K this year.",
     author: 'James Rodriguez',
     title: 'YouTuber',
     avatar: '/images/avatar-james.jpg',
@@ -103,7 +103,7 @@ const SocialProof = () => {
             Trusted by <span className="text-primary">Thousands</span>
           </h2>
           <p className="body-text-lg">
-            See what real affiliates are saying about SphereKings.
+            See what real affiliates are saying about SphereOfKings.
           </p>
         </div>
 

@@ -82,7 +82,7 @@ const ValueProp = () => {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
           <h2 className="heading-2 mb-4">
-            Why SphereKings <span className="text-primary">Stands Out</span>
+            Why SphereOfKings <span className="text-primary">Stands Out</span>
           </h2>
           <p className="body-text-lg">
             A genuine two-sided marketplace designed for success.

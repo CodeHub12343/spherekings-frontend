@@ -140,7 +140,7 @@ export default function AffiliateSidebar() {
   return (
     <SidebarContainer>
       <Logo>
-        <h1>Spherekings</h1>
+        <h1>SphereOfKings</h1>
       </Logo>
 
       <NavGroup>

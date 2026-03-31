@@ -159,7 +159,7 @@ export default function FollowersSection() {
           <Title>Be Part of Something Great</Title>
 
           <Subtitle>
-            Join thousands of others who are following SphereKings. Get exclusive updates,
+            Join thousands of others who are following SphereOfKings. Get exclusive updates,
             early access to new features, and stay connected to our growing community.
           </Subtitle>
         </HeaderSection>

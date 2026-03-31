@@ -18,7 +18,7 @@ const steps = [
     title: 'Get Your Unique Link',
     description:
       'Instantly receive your unique referral link and custom dashboard. Share it on your blog, social media, email. Track every referral automatically.',
-    details: 'Link structure: spherekings.com?ref=yourname',
+    details: 'Link structure: sphereofkings.com?ref=yourname',
   },
   {
     number: '3',

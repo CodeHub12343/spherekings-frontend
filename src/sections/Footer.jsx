@@ -1,7 +1,8 @@
 "use client";
 
 import Link from 'next/link';
-import { Crown, Linkedin, Twitter, Instagram, Check } from 'lucide-react';
+import Image from 'next/image';
+import { Linkedin, Twitter, Instagram, Check } from 'lucide-react';
 
 const footerLinks = {
   shop: {
@@ -56,10 +57,16 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <Crown className="w-5 h-5 text-white" />
+              <div className="w-10 h-10">
+                <Image
+                  src="/images/1000019613-removebg-preview.png"
+                  alt="SphereOfKings Logo"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <span className="text-xl font-bold text-navy">SphereKings</span>
+              <span className="text-xl font-bold text-navy">SphereOfKings</span>
             </Link>
             <p className="text-[14px] text-gray-text mb-6">
               The marketplace where everyone wins.
@@ -220,7 +227,7 @@ const Footer = () => {
         <div className="section-container py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-[13px] text-gray-text">
-              © 2024 SphereKings. All rights reserved.
+              © 2024 SphereOfKings. All rights reserved.
             </p>
             <p className="text-[13px] text-gray-light">
               Last updated March 21, 2026

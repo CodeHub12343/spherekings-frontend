@@ -73,7 +73,6 @@ const Logo = styled(Link)`
   }
 `;
 
-// Desktop Navigation
 const DesktopNav = styled.nav`
   display: flex;
   gap: 40px;
@@ -599,7 +598,7 @@ export default function Header() {
           {/* Logo */}
           <LogoSection>
             <Logo href="/">
-              Spherekings
+              SphereOfKings
             </Logo>
           </LogoSection>
 

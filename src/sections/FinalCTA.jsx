@@ -47,7 +47,7 @@ const FinalCTA = () => {
           </h2>
 
           <p className="text-[18px] md:text-[20px] text-gray-300 mb-4 reveal-item opacity-0 translate-y-8 transition-all duration-500 ease-out">
-            Join thousands of affiliates making real money with SphereKings.
+            Join thousands of affiliates making real money with SphereOfKings.
           </p>
 
           <p className="text-[16px] text-gray-400 mb-10 reveal-item opacity-0 translate-y-8 transition-all duration-500 ease-out">
