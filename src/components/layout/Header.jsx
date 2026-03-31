@@ -547,12 +547,21 @@ export default function Header() {
   // Handle logout
   const handleLogout = async () => {
     try {
-      await logout();
       setIsUserDropdownOpen(false);
       setIsMobileMenuOpen(false);
-      router.push('/login');
+      setExpandedMobileSection(null);
+      
+      await logout();
+      
+      // Use replace to prevent back button issues and ensure redirect happens
+      // Add small delay to ensure auth state is fully cleared
+      setTimeout(() => {
+        router.replace('/login');
+      }, 100);
     } catch (error) {
       console.error('Logout failed:', error);
+      // Still redirect even if logout fails
+      router.replace('/login');
     }
   };
 
@@ -797,8 +806,6 @@ export default function Header() {
                   onClick={(e) => {
                     e.preventDefault();
                     handleLogout();
-                    setIsMobileMenuOpen(false);
-                    setExpandedMobileSection(null);
                   }}
                   style={{ color: '#dc2626' }}
                 >
@@ -858,16 +865,6 @@ export default function Header() {
                   }}
                 >
                   Payouts
-                </CollapsibleNavLink>
-                <CollapsibleNavLink
-                  href="/affiliate/dashboard"
-                  className={isActive('/affiliate/dashboard') ? 'active' : ''}
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setExpandedMobileSection(null);
-                  }}
-                >
-                  Dashboard
                 </CollapsibleNavLink>
               </CollapsibleSectionContent>
             </div>
@@ -983,16 +980,6 @@ export default function Header() {
                   }}
                 >
                   Categories
-                </CollapsibleNavLink>
-                <CollapsibleNavLink
-                  href="/admin/dashboard"
-                  className={isActive('/admin/dashboard') ? 'active' : ''}
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setExpandedMobileSection(null);
-                  }}
-                >
-                  Dashboard
                 </CollapsibleNavLink>
               </CollapsibleSectionContent>
             </div>

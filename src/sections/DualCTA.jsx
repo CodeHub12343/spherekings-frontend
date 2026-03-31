@@ -85,7 +85,7 @@ const DualCTA = () => {
               ))}
             </ul>
 
-            <Link href="/products" className="btn-secondary w-full block text-center">
+            <Link href="/login" className="btn-secondary w-full block text-center">
               Browse Products
               <ArrowRight className="w-4 h-4 inline ml-2" />
             </Link>
