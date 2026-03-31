@@ -460,9 +460,14 @@ const CollapsibleSectionHeader = styled.button`
 
 const CollapsibleSectionContent = styled.div`
   display: ${props => (props.isOpen ? 'block' : 'none')};
-  max-height: ${props => (props.isOpen ? '500px' : '0')};
-  overflow: hidden;
+  max-height: ${props => (props.isOpen ? 'none' : '0')};
+  overflow-y: ${props => (props.isOpen ? 'auto' : 'hidden')};
   transition: max-height 0.3s ease;
+  
+  /* Allow internal scrolling for long lists */
+  @media (max-width: 640px) {
+    max-height: ${props => (props.isOpen ? 'calc(100vh - 300px)' : '0')};
+  }
 `;
 
 const CollapsibleNavLink = styled(Link)`
