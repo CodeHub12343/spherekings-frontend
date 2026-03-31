@@ -653,6 +653,19 @@ const orderStatuses = [
 
 const paymentStatuses = ['paid', 'pending', 'failed', 'refunded'];
 
+// Valid status transitions based on current status
+const VALID_STATUS_TRANSITIONS = {
+  pending: ['processing', 'cancelled'],
+  processing: ['confirmed', 'shipped', 'cancelled', 'refunded'],
+  confirmed: ['shipped', 'cancelled', 'refunded'],
+  shipped: ['delivered', 'returned'],
+  delivered: ['returned'],
+  cancelled: [],
+  refunded: [],
+  returned: [],
+  complete: [],
+};
+
 export default function AdminOrdersPage() {
   const {
     orders,
@@ -969,7 +982,7 @@ export default function AdminOrdersPage() {
             onChange={(e) => setNewStatus(e.target.value)}
           >
             <option value="">Select new status...</option>
-            {orderStatuses.map((status) => (
+            {selectedOrder && (VALID_STATUS_TRANSITIONS[selectedOrder.orderStatus] || []).map((status) => (
               <option key={status} value={status}>
                 {status.charAt(0).toUpperCase() + status.slice(1)}
               </option>
