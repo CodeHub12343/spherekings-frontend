@@ -1,8 +1,6 @@
 'use client';
 
-'use client';
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -73,6 +71,7 @@ const Logo = styled(Link)`
   }
 `;
 
+// Desktop Navigation
 const DesktopNav = styled.nav`
   display: flex;
   gap: 40px;
@@ -512,6 +511,20 @@ export default function Header() {
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [expandedMobileSection, setExpandedMobileSection] = useState(null);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    // Cleanup function to restore scroll on unmount
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMobileMenuOpen]);
+
   // Hide header on auth routes
   const authRoutes = ['/login', '/register', '/forgot-password', '/reset-password'];
   const isAuthRoute = authRoutes.some(route => pathname.startsWith(route));
@@ -598,7 +611,7 @@ export default function Header() {
           {/* Logo */}
           <LogoSection>
             <Logo href="/">
-              SphereOfKings
+              Spherekings
             </Logo>
           </LogoSection>
 
