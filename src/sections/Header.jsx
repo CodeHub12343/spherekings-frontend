@@ -178,3 +178,5 @@ const HeaderSkeleton = () => (
   </header>
 );
 
+export default Header;
+
