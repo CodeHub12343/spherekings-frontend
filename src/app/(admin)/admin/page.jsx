@@ -184,6 +184,13 @@ export default function AdminDashboard() {
             <p>Manage user accounts, roles, and platform permissions.</p>
             <span className="arrow">Go to Management →</span>
           </Card>
+
+          <Card href="/admin/coupons">
+            <div className="icon">🏷️</div>
+            <h2>Coupons & Promos</h2>
+            <p>Create discount codes, track usage, and measure campaign performance as sales channels.</p>
+            <span className="arrow">Go to Management →</span>
+          </Card>
         </DashboardGrid>
       </Section>
 
@@ -201,6 +208,9 @@ export default function AdminDashboard() {
           </QuickLink>
           <QuickLink href="/admin/users">
             <span>👤</span> Users
+          </QuickLink>
+          <QuickLink href="/admin/coupons">
+            <span>🏷️</span> Coupons
           </QuickLink>
           <QuickLink href="/admin/analytics">
             <span>📊</span> Analytics

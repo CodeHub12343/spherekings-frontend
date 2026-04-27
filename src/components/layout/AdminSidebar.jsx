@@ -15,7 +15,8 @@ import {
   BarChart3,
   FileText,
   Store,
-  Gift
+  Gift,
+  Tag
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -144,6 +145,7 @@ const ADMIN_MENU = [
       { label: 'Payouts', href: '/admin/payouts', icon: TrendingUp },
       { label: 'Retail Locations', href: '/admin/retail-locations', icon: Store },
       { label: 'Raffles', href: '/admin/raffle', icon: Gift },
+      { label: 'Coupons', href: '/admin/coupons', icon: Tag },
       { label: 'Categories', href: '/admin/categories', icon: FileText },
     ]
   },

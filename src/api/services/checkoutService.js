@@ -28,7 +28,7 @@ import referralService from '@/api/services/referralService';
  */
 export async function createCheckoutSession(options = {}) {
   try {
-    let { affiliateId, visitorId, metadata, shippingAddress } = options;
+    let { affiliateId, visitorId, metadata, shippingAddress, couponCode } = options;
     
     console.log('\n╔════════════════════════════════════════════════════════╗');
     console.log('║    🔗 AFFILIATE ATTRIBUTION CHECKOUT FLOW              ║');
@@ -95,6 +95,7 @@ export async function createCheckoutSession(options = {}) {
       ...(visitorId && { visitorId }),
       ...(affiliateId && { affiliateId }),  // CRITICAL: Include in body too!
       ...(shippingAddress && { shippingAddress }),
+      ...(couponCode && { couponCode }),    // COUPON: Include coupon code for discount
     };
 
     console.log('\n📨 [REQUEST BUILT] Sending to backend:', {
