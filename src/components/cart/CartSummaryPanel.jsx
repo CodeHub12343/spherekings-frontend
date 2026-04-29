@@ -87,10 +87,10 @@ const ContinueShoppingButtonStyled = styled(Button)`
   }
 `;
 
-const PromoCodeSection = styled.div`
+/* const PromoCodeSection = styled.div`
   display: flex;
   gap: 8px;
-`;
+`; */
 
 const PromoInput = styled.input`
   flex: 1;
@@ -214,10 +214,10 @@ export default function CartSummaryPanel({
         </ContinueShoppingButtonStyled>
       </ButtonGroup>
 
-      <PromoCodeSection>
+      {/*  <PromoCodeSection>
         <PromoInput placeholder="Enter promo code" />
         <PromoButton onClick={() => onPromoCode()}>Apply</PromoButton>
-      </PromoCodeSection>
+      </PromoCodeSection>  */}
     </SummaryContainer>
   );
 }

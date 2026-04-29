@@ -932,6 +932,16 @@ export default function Header() {
                   Commissions
                 </CollapsibleNavLink>
                 <CollapsibleNavLink
+                  href="/admin/coupons"
+                  className={isActive('/admin/coupons') ? 'active' : ''}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setExpandedMobileSection(null);
+                  }}
+                >
+                  Coupons
+                </CollapsibleNavLink>
+                <CollapsibleNavLink
                   href="/admin/payouts"
                   className={isActive('/admin/payouts') ? 'active' : ''}
                   onClick={() => {
