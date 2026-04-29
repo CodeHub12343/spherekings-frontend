@@ -144,6 +144,10 @@ const TableCard = styled.div`
 
 const TableWrapper = styled.div`
   overflow-x: auto;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Table = styled.table`
@@ -169,6 +173,53 @@ const Td = styled.td`
   padding: 14px 16px;
   border-bottom: 1px solid #f3f4f6;
   color: #1f2937;
+`;
+
+/* ---- Mobile card layout for coupon performance ---- */
+
+const MobileCardList = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+  }
+`;
+
+const CouponCard = styled.div`
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px;
+`;
+
+const CouponCardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f3f4f6;
+`;
+
+const CouponCardRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  font-size: 13px;
+
+  .card-label {
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  .card-value {
+    font-weight: 600;
+    color: #1f2937;
+  }
 `;
 
 const CodeBadge = styled.span`
@@ -387,48 +438,93 @@ export default function AdminCouponAnalyticsPage() {
                 <p>Coupon usage data will appear here once coupons are used.</p>
               </EmptyState>
             ) : (
-              <TableWrapper>
-                <Table>
-                  <thead>
-                    <tr>
-                      <Th>Code</Th>
-                      <Th>Discount</Th>
-                      <Th>Status</Th>
-                      <Th>Uses</Th>
-                      <Th>Orders</Th>
-                      <Th>Revenue</Th>
-                      <Th>Avg Order</Th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {couponsList.map((coupon) => (
-                      <tr key={coupon._id}>
-                        <Td>
-                          <CodeBadge>{coupon.code}</CodeBadge>
-                        </Td>
-                        <Td>
-                          <span style={{ fontWeight: 600, color: '#5b4dff' }}>
-                            {coupon.discountType === 'percentage'
-                              ? `${coupon.discountValue}%`
-                              : formatCurrency(coupon.discountValue)}
-                          </span>
-                        </Td>
-                        <Td>
-                          <StatusBadge $active={coupon.isActive}>
-                            {coupon.isActive ? 'Active' : 'Inactive'}
-                          </StatusBadge>
-                        </Td>
-                        <Td style={{ fontWeight: 600 }}>{coupon.usageCount}</Td>
-                        <Td>{coupon.totalOrders}</Td>
-                        <Td style={{ fontWeight: 600, color: '#059669' }}>
-                          {formatCurrency(coupon.totalRevenue)}
-                        </Td>
-                        <Td>{formatCurrency(coupon.averageOrderValue)}</Td>
+              <>
+                {/* Desktop table */}
+                <TableWrapper>
+                  <Table>
+                    <thead>
+                      <tr>
+                        <Th>Code</Th>
+                        <Th>Discount</Th>
+                        <Th>Status</Th>
+                        <Th>Uses</Th>
+                        <Th>Orders</Th>
+                        <Th>Revenue</Th>
+                        <Th>Avg Order</Th>
                       </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </TableWrapper>
+                    </thead>
+                    <tbody>
+                      {couponsList.map((coupon) => (
+                        <tr key={coupon._id}>
+                          <Td>
+                            <CodeBadge>{coupon.code}</CodeBadge>
+                          </Td>
+                          <Td>
+                            <span style={{ fontWeight: 600, color: '#5b4dff' }}>
+                              {coupon.discountType === 'percentage'
+                                ? `${coupon.discountValue}%`
+                                : formatCurrency(coupon.discountValue)}
+                            </span>
+                          </Td>
+                          <Td>
+                            <StatusBadge $active={coupon.isActive}>
+                              {coupon.isActive ? 'Active' : 'Inactive'}
+                            </StatusBadge>
+                          </Td>
+                          <Td style={{ fontWeight: 600 }}>{coupon.usageCount}</Td>
+                          <Td>{coupon.totalOrders}</Td>
+                          <Td style={{ fontWeight: 600, color: '#059669' }}>
+                            {formatCurrency(coupon.totalRevenue)}
+                          </Td>
+                          <Td>{formatCurrency(coupon.averageOrderValue)}</Td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </TableWrapper>
+
+                {/* Mobile cards */}
+                <MobileCardList>
+                  {couponsList.map((coupon) => (
+                    <CouponCard key={coupon._id}>
+                      <CouponCardHeader>
+                        <CodeBadge>{coupon.code}</CodeBadge>
+                        <StatusBadge $active={coupon.isActive}>
+                          {coupon.isActive ? 'Active' : 'Inactive'}
+                        </StatusBadge>
+                      </CouponCardHeader>
+                      <CouponCardRow>
+                        <span className="card-label">Discount</span>
+                        <span className="card-value" style={{ color: '#5b4dff' }}>
+                          {coupon.discountType === 'percentage'
+                            ? `${coupon.discountValue}%`
+                            : formatCurrency(coupon.discountValue)}
+                        </span>
+                      </CouponCardRow>
+                      <CouponCardRow>
+                        <span className="card-label">Uses</span>
+                        <span className="card-value">{coupon.usageCount}</span>
+                      </CouponCardRow>
+                      <CouponCardRow>
+                        <span className="card-label">Orders</span>
+                        <span className="card-value">{coupon.totalOrders}</span>
+                      </CouponCardRow>
+                      <CouponCardRow>
+                        <span className="card-label">Revenue</span>
+                        <span className="card-value" style={{ color: '#059669' }}>
+                          {formatCurrency(coupon.totalRevenue)}
+                        </span>
+                      </CouponCardRow>
+                      <CouponCardRow>
+                        <span className="card-label">Avg Order</span>
+                        <span className="card-value">
+                          {formatCurrency(coupon.averageOrderValue)}
+                        </span>
+                      </CouponCardRow>
+                    </CouponCard>
+                  ))}
+                </MobileCardList>
+              </>
             )}
           </TableCard>
         </div>
